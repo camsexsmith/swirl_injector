@@ -69,13 +69,13 @@ print('----------------------------------------------')
 print('                 Outer Swirl                  ')
 print('----------------------------------------------')
 
-theta_i, phi_i_n, phi_i_ne, U_i_ne, U_i_n, V_i_ma_ine, V_i_ma_in, V_i_h, r_i_ma_ine, r_o_ma_in = SF.swirl(R_i,r_i_h,r_i_nw,rho_i,mdot_i,n,A_i_n)
+theta_i, phi_i_n, phi_i_ne, U_i_ne, U_i_n, V_i_ma_ine, V_i_ma_in, V_i_h, r_i_ma_ine, r_o_ma_in = SF.swirl(R_i,r_i_h,r_i_nw,rho_i,mdot_i,n_i,A_i_n)
 
 print('----------------------------------------------')
 print('                 Inner Swirl                  ')
 print('----------------------------------------------')
 
-theta_o, phi_o_n, phi_o_ne, U_o_ne, U_o_n, V_o_ma_one, V_o_ma_on, V_o_h, r_o_ma_one, r_o_ma_on = SF.swirl(R_o,r_o_h,r_o_nw,rho_o,mdot_o,n,A_o_n)
+theta_o, phi_o_n, phi_o_ne, U_o_ne, U_o_n, V_o_ma_one, V_o_ma_on, V_o_h, r_o_ma_one, r_o_ma_on = SF.swirl(R_o,r_o_h,r_o_nw,rho_o,mdot_o,n_o,A_o_n)
 
 
 #Impingment distance (Li)
@@ -124,4 +124,5 @@ print(f'Radius of mass avg liquid in nozzle: {round(r_t_ma_on*1000,2)} mm')
 print(f'Radius of mass avg liquid at nozzle exit: {round(r_t_ma_one*1000,2)} mm')
 print(f'Circumferential Nozzle Velocity: {round(V_t_ma_on,2)} m/s')
 print(f'Circumferential Nozzle Exit Velocity: {round(V_t_ma_one,2)} m/s')
+print(f'Resulting swirl angle: {round(theta_t,1)} deg')
 
