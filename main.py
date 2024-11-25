@@ -22,6 +22,11 @@ rho_f = 700
 # 1 = Ox centered : 0 = Fuel centered
 centered = 1
 
+#Dictates whether co-swirler (same direction) or counter-swirler (opposite direction)
+# Outer is held constant positive, inner can change direction
+# 1 = co-swril and -1 = counter swirler
+swirl_dir = -1
+
 if centered == 1:
     mdot_i = mdot_ox
     rho_i = rho_ox
@@ -100,7 +105,7 @@ r_t_ma_on = r_o_nw*m.sqrt((2-phi_t_on)/2)
 r_t_ma_one = r_o_nw*m.sqrt((2-phi_t_one)/2)
 
 #Combined circumferential velocity in nozzle [m/s]
-V_t_ma_on = (mdot_i*V_i_ma_ine*r_i_ma_ine + mdot_o*V_o_ma_on*r_o_ma_on)/((mdot_o + mdot_i)*r_t_ma_on)
+V_t_ma_on = (swirl_dir*mdot_i*V_i_ma_ine*r_i_ma_ine + mdot_o*V_o_ma_on*r_o_ma_on)/((mdot_o + mdot_i)*r_t_ma_on)
 
 #Combined axial velocity at nozzle exit [m/s]
 U_t_one = (mdot_o + mdot_i)/(rho_t*phi_t_one*A_o_n)
@@ -109,7 +114,7 @@ U_t_one = (mdot_o + mdot_i)/(rho_t*phi_t_one*A_o_n)
 V_t_ma_one = V_t_ma_on*r_t_ma_on/r_t_ma_one
 
 #Combined spray angle [deg]
-theta_t = m.degrees(m.atan(V_t_ma_one/U_t_one))
+theta_t = m.degrees(m.atan2(V_t_ma_one,U_t_one))
 
 print('----------------------------------------------')
 print('               Resulting Swirl                ')
