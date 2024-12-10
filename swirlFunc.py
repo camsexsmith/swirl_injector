@@ -47,6 +47,12 @@ def swirl(R,rh,rnw,rho,mdot,n,An):
 
     theta = m.degrees(m.atan(V_ma_ne/U_ne))      #Resulting angle of center swirl sheet  [deg]
 
+    Cd = 1.7432*(K**0.4961 + (R/rnw)**-0.2956)**-2.4204
+
     print(f'Resultant swirl angle: {round(theta,1)} deg')
 
-    return theta, phi_n, phi_ne, U_ne, U_n, V_ma_ne, V_ma_n, Vh, r_ma_ne, r_ma_n
+    print(f'Geometric Constant (K): {round(K,2)}')
+    print(f'Cd: {round(Cd,2)}')
+  
+
+    return theta, phi_n, phi_ne, U_ne, U_n, V_ma_ne, V_ma_n, Vh, r_ma_ne, r_ma_n, K, Cd
