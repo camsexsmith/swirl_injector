@@ -4,6 +4,9 @@ import swirlFunc as SF
 #Total mass flow rate through swirl [kg/s]
 mdot = 3.6
 
+#Chamber pressure [Pa]
+Pc = 500*6895
+
 #Mixture ratio
 MR = 1.3
 
@@ -58,6 +61,9 @@ r_o_h = 0.00508
 #Outer nozzle wall radius [m]
 r_o_nw = 0.022225
 
+#Wall thickness [m]
+w_th = 0.0032
+
 #Number of inlet ports of inner swirler
 n_i = 6
 
@@ -68,7 +74,7 @@ n_o = 8
 A_i_n = m.pi*r_i_nw**2
 
 #Cross sectional area of outer swirler [m2]
-A_o_n = m.pi*(r_o_nw**2 - r_i_nw**2)
+A_o_n = m.pi*(r_o_nw**2 - (r_i_nw+w_th)**2)
 
 print('----------------------------------------------')
 print('                 Inner Swirl                  ')
@@ -81,6 +87,12 @@ print('                 Outer Swirl                  ')
 print('----------------------------------------------')
 
 theta_o, phi_o_n, phi_o_ne, U_o_ne, U_o_n, V_o_ma_one, V_o_ma_on, V_o_h, r_o_ma_one, r_o_ma_on, K_o, Cd_o = SF.swirl(R_o,r_o_h,r_o_nw,rho_o,mdot_o,n_o,A_o_n)
+
+#Pressure drop analysis
+P_o = Pc + (1/(2*rho_o))*(mdot_o/(Cd_o*A_o_n))**2
+
+P_i = Pc + (1/(2*rho_i))*(mdot_i/(Cd_i*A_i_n))**2
+
 
 #Impingment distance (Li)
 Li = (r_o_nw-r_i_nw)/m.tan(m.radians(theta_i))
