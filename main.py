@@ -2,13 +2,13 @@ import math as m
 import swirlFunc as SF
 
 #Total mass flow rate through swirl [kg/s]
-mdot = 3.6
+mdot = 0.220
 
 #Chamber pressure [Pa]
 Pc = 500*6895
 
 #Mixture ratio
-MR = 1.3
+MR = 4
 
 #Mass flow rate of oxidizer [kg/s]
 mdot_ox = mdot*MR/(MR+1)
@@ -20,15 +20,15 @@ mdot_f = mdot/(MR+1)
 rho_ox = 1000
 
 #Density of fuel [kg/m3]
-rho_f = 700
+rho_f = 1000
 
 # 1 = Ox centered : 0 = Fuel centered
 centered = 1
 
 #Dictates whether co-swirler (same direction) or counter-swirler (opposite direction)
 # Outer is held constant positive, inner can change direction
-# 1 = co-swril and -1 = counter swirler
-swirl_dir = -1
+# 1 = co-swirl and -1 = counter swirler
+swirl_dir = 1
 
 if centered == 1:
     mdot_i = mdot_ox
@@ -43,32 +43,35 @@ elif centered == 0:
     mdot_o = mdot_ox
     rho_o = rho_ox
 
+#Recess length [m]
+Lr = 6/1000
+
 #Distane from swirler center to inner inlet hole centerline [m]
-R_i = 0.0079375
+R_i = 2.45/1000
 
 #Inner inlet hole radius [m]
-r_i_h = 0.003175
+r_i_h = 1.48/2/1000
 
 #Inner nozzle wall radius [m]
-r_i_nw = 0.009525
+r_i_nw = 3.5/2/1000
 
 #Distane from swirler center to outer inlet hole centerline [m]
-R_o = 0.0206375
+R_o = 3.25/1000
 
 #Outer inlet hole radius [m]
-r_o_h = 0.00508
+r_o_h = 0.86/2/1000
 
 #Outer nozzle wall radius [m]
-r_o_nw = 0.022225
+r_o_nw = 7.5/2/1000
 
 #Wall thickness [m]
-w_th = 0.0032
+w_th = 0
 
 #Number of inlet ports of inner swirler
-n_i = 6
+n_i = 8
 
 #Number of inlet port of outer swirler
-n_o = 8
+n_o = 4
 
 #Cross sectional area of inner swirler [m2]
 A_i_n = m.pi*r_i_nw**2
@@ -93,9 +96,14 @@ P_o = Pc + (1/(2*rho_o))*(mdot_o/(Cd_o*A_o_n))**2
 
 P_i = Pc + (1/(2*rho_i))*(mdot_i/(Cd_i*A_i_n))**2
 
+#print((P_o-Pc)/100000)
+#print((P_i-Pc)/100000)
 
-#Impingment distance (Li)
+#Impingment distance (Li) [m]
 Li = (r_o_nw-r_i_nw)/m.tan(m.radians(theta_i))
+
+#Recess number (Lr/Li) > 1 for internal mixing
+RN = Lr/Li
 
 #Combined propellant density [kg/m3]
 rho_t = (rho_o*mdot_o + rho_i*mdot_i)/(mdot_i+mdot_o)
@@ -141,4 +149,5 @@ print(f'Radius of mass avg liquid at nozzle exit: {round(r_t_ma_one*1000,2)} mm'
 print(f'Circumferential Nozzle Velocity: {round(V_t_ma_on,2)} m/s')
 print(f'Circumferential Nozzle Exit Velocity: {round(V_t_ma_one,2)} m/s')
 print(f'Resulting swirl angle: {round(theta_t,1)} deg')
+print(f'Recess Number (RN): {round(RN,2)}')
 
