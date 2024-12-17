@@ -2,13 +2,13 @@ import math as m
 import swirlFunc as SF
 
 #Total mass flow rate through swirl [kg/s]
-mdot = 0.220
+mdot = 0.22
 
 #Chamber pressure [Pa]
 Pc = 500*6895
 
 #Mixture ratio
-MR = 4
+MR = 2.8
 
 #Mass flow rate of oxidizer [kg/s]
 mdot_ox = mdot*MR/(MR+1)
@@ -28,7 +28,7 @@ centered = 1
 #Dictates whether co-swirler (same direction) or counter-swirler (opposite direction)
 # Outer is held constant positive, inner can change direction
 # 1 = co-swirl and -1 = counter swirler
-swirl_dir = 1
+swirl_dir = -1
 
 if centered == 1:
     mdot_i = mdot_ox
@@ -150,4 +150,3 @@ print(f'Circumferential Nozzle Velocity: {round(V_t_ma_on,2)} m/s')
 print(f'Circumferential Nozzle Exit Velocity: {round(V_t_ma_one,2)} m/s')
 print(f'Resulting swirl angle: {round(theta_t,1)} deg')
 print(f'Recess Number (RN): {round(RN,2)}')
-
