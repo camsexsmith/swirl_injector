@@ -68,10 +68,10 @@ r_o_nw = 7.5/2/1000
 w_th = 0
 
 #Number of inlet ports of inner swirler
-n_i = 8
+n_i = 4
 
 #Number of inlet port of outer swirler
-n_o = 4
+n_o = 12
 
 #Cross sectional area of inner swirler [m2]
 A_i_n = m.pi*r_i_nw**2
