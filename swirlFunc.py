@@ -4,7 +4,7 @@ def swirl(R,rh,rnw,rho,mdot,n,An,prnt:bool=True):
 
     K = rnw*R/(n*rh**2)     #Geometric constant
 
-    phi_n = 0.1  #Initial filling coefficient guess
+    phi_n = 0.01  #Initial filling coefficient guess
     err = 1     #Initializing error variable
 
     #Loop using Newtons Method for finding filling coefficient
