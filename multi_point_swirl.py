@@ -16,28 +16,28 @@ swirl_dir = -1
 Pc = 500*6895
 
 #Recess length [m]
-Lr = 10/1000
+Lr = 0.00635
 
 #Distane from swirler center to inner inlet hole centerline [m]
-R_i = 10/1000
+R_i = 0.00381-0.000635
 
 #Inner inlet hole radius [m]
-r_i_h = 2/2/1000
+r_i_h = 0.000635
 
 #Inner nozzle wall radius [m]
-r_i_nw = 12/1000
+r_i_nw = 0.00381
 
 #Distane from swirler center to outer inlet hole centerline [m]
-R_o = 20/1000
+R_o = 0.00762-0.00127
 
 #Outer inlet hole radius [m]
-r_o_h = 2/2/1000
+r_o_h = 0.00127
 
 #Outer nozzle wall radius [m]
-r_o_nw = 22/1000
+r_o_nw = 0.00762
 
 #Wall thickness [m]
-w_th = 0
+w_th = 0.00254
 
 #Number of inlet ports of inner swirler
 n_i = 8
@@ -45,12 +45,10 @@ n_i = 8
 #Number of inlet port of outer swirler
 n_o = 8
 
-out_mat_po = []
-out_mat_pi = []
-for o in range(1,n_o,1):
-    out_po_temp = []
-    out_pi_temp = []
-    for i in range(1,n_i,1):
+out_mat = []
+for o in range(4,n_o,1):
+    out_temp = []
+    for i in range(4,n_i,1):
 
         #print(f'{i},{o}')
         #Recess Number (RN),swirl angle (swirlAng), P outer (Po), P inner (Pi), Vel axial (Uaxial), Vel Circum (VCircum),
@@ -58,25 +56,23 @@ for o in range(1,n_o,1):
 
         out = bSF.biSwirl(mdot,MR,rhoOx,rhoF,Pc,centered,swirl_dir,R_i,R_o,r_i_h,r_o_h,r_i_nw,r_o_nw,i,o,w_th,Lr)
         
-        out_po_temp.append(out["Po"])
-        out_pi_temp.append(out["Pi"])
+        out_temp.append(out["Pi"])
         
 
-    out_mat_po.append(out_po_temp)
-    out_mat_pi.append(out_pi_temp)
+    out_mat.append(out_temp)
 
-out_mat_po = np.array(out_mat_po)
-out_mat_pi = np.array(out_mat_pi)
+out_mat = np.array(out_mat)
+
 
 
 fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
 
 # Meshing that grid
-X = np.arange(1, n_i, 1)
-Y = np.arange(1, n_o, 1)
+X = np.arange(4, n_i, 1)
+Y = np.arange(4, n_o, 1)
 X, Y = np.meshgrid(X, Y)
 
-surf = ax.plot_surface(X, Y, out_mat_pi/6895, cmap=cm.coolwarm,linewidth=0, antialiased=False)
+surf = ax.plot_surface(X, Y, out_mat, cmap=cm.coolwarm,linewidth=0, antialiased=False)
 
 ax.set_xlabel('Number inner ports')
 ax.set_ylabel('Number outer ports')
