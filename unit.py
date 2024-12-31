@@ -1,3 +1,4 @@
+import math
 def in2m(inch):
     return inch*0.0254
 
@@ -15,3 +16,6 @@ def ft2m(ft):
 
 def m2ft(m):
     return m/0.3048
+
+def rad2deg(rad):
+    return rad*180/math.pi

@@ -2,17 +2,18 @@ import biSwirlFunc as bSF
 import numpy as np
 import unit as u
 import math as m
+import json
 
 #Inputs
 # mdot,MR, rhoOx, rhoF,ox/f centered,swirl dir, R_i, R_o, rh_i, rh_o, rnw_i, rnw_o, w_thck, n_i, n_o, L recess, Pc
 
 num_swirl = 8
-mdot = 3.7/num_swirl
-MR = 1.3
+mdot = 4.25/num_swirl
+MR = 1.1
 rhoOx = 1100
 rhoF = 786
 centered = 1
-swirl_dir = -1
+swirl_dir = -1      # 1 = co-swirl and -1 = counter swirler
 Pc = u.psi2pa(500)
 
 #Recess length [m]
@@ -22,7 +23,7 @@ Lr = u.in2m(0.250)
 R_i = u.in2m(0.150)-u.in2m(0.025)
 
 #Inner inlet hole radius [m]
-r_i_h = u.in2m(0.025)
+r_i_h = u.in2m(0.03)
 
 #Inner nozzle wall radius [m]
 r_i_nw = u.in2m(0.150)
@@ -31,7 +32,7 @@ r_i_nw = u.in2m(0.150)
 R_o = u.in2m(0.300)-u.in2m(0.050)
 
 #Outer inlet hole radius [m]
-r_o_h = u.in2m(0.050)
+r_o_h = u.in2m(0.045)
 
 #Outer nozzle wall radius [m]
 r_o_nw = u.in2m(0.300)
@@ -51,8 +52,14 @@ n_o = 6
 
 out = bSF.biSwirl(mdot,MR,rhoOx,rhoF,Pc,centered,swirl_dir,R_i,R_o,r_i_h,r_o_h,r_i_nw,r_o_nw,n_i,n_o,w_th,Lr)
 
+K_i = out["Ki"]
+K_o = out["Ko"]
+
 dP_o = out["Po"] - Pc
 dP_i = out["Pi"] - Pc
+
+RN = out["RN"]
+swirl_ang = out["swirlAng"]
 
 phi_i_ne = out["PhiNEi"]
 phi_o_n = out["PhiO"]
@@ -62,19 +69,85 @@ stiff_i = dP_i/Pc*100
 
 #Radius of gas core on outer swirl
 r_o_gc = r_o_nw*m.sqrt(1-phi_o_n)
+r_i_gc = r_i_nw*m.sqrt(1-phi_i_ne)
 
 r_i_tot = r_i_nw + w_th
 
+print('-----------------------------')
 if r_o_gc < r_i_tot:
     print(f"NOT Possible: gas core {round(u.m2in(r_o_gc),3)} inner {round(u.m2in(r_i_tot),3)}")
 else:
     print(f"Possible: gas core {round(u.m2in(r_o_gc),3)} inner {round(u.m2in(r_i_tot),3)}")
-
-
+print('-----------------------------')
 print('Pressures')
 print(f'Outer: {round(u.pa2psi(out["Po"]),1)} psi \ Stiffness {round(stiff_o,2)}')
 print(f'Inner: {round(u.pa2psi(out["Pi"]),1)} psi \ Stiffness {round(stiff_i,2)}')
+print('-----------------------------')
+print('Fill Fractions')
+print(f'Outer: {round(phi_o_n,2)} \ gas core radius {round(u.m2in(r_o_gc),3)} in')
+print(f'Inner: {round(phi_i_ne,2)} \ gas core radius {round(u.m2in(r_i_gc),3)} in')
+print('-----------------------------')
+print('Swirls')
+print(f'RN: {round(RN,2)}')
+print(f'Angle: {round(u.rad2deg(swirl_ang),2)}')
+print('-----------------------------')
+print('Flow Rates')
+print(f'Total flow {round(mdot*num_swirl,1)} kg/s')
+print(f'Flow per swirl {round(mdot,3)} kg/s')
+print(f'    Ox flow {round(mdot*MR/(1+MR),3)} kg/s')
+print(f'    Fuel flow {round(mdot/(1+MR),3)} kg/s')
+print('-----------------------------')
 
-print('Fill Fraction')
-print(f'Outer: {round(u.pa2psi(out["Po"]),1)} psi \ Stiffness {round(stiff_o,2)}')
-print(f'Inner: {round(u.pa2psi(out["Pi"]),1)} psi \ Stiffness {round(stiff_i,2)}')
+#Geometric output
+dimen = {"INNER":{"Nozzle diameter (in)": u.m2in(r_i_nw*2),
+                  "Port diameter (in)": u.m2in(r_i_h*2),
+                  "Port number": n_i,
+                  "Recess length (in)": u.m2in(Lr),
+                  "Wall thickness (in)": u.m2in(w_th)},
+         "OUTER":{"Nozzle diameter (in)":u.m2in(r_o_nw*2),
+                  "Port diameter (in)": u.m2in(r_o_h*2),
+                  "Port number": n_o}}
+
+swirl = {"PRESSURE":
+         {
+        "Outer":{
+            "Inj Pressure (psi)": round(u.pa2psi(out["Po"]),1),
+            "Stiffness (%)": round(stiff_o,2)
+            },
+        "Inner":{
+            "Inj Pressure (psi)": round(u.pa2psi(out["Pi"]),1),
+            "Stiffness (%)": round(stiff_i,2)}
+        },
+        "FILL FRACTIONS":
+        {
+        "Outer":{
+            "Fill Frac": round(phi_o_n,2)},
+        "Inner":{
+            "Fill Frac": round(phi_i_ne,2)}
+        },
+        "FLOW RATES":
+        {
+        "Outer":{
+            "Per swirl (kg/s)": round(mdot/(1+MR),3),},
+        "Inner":{
+            "Per swirl (kg/s)": round(mdot*MR/(1+MR),3)}
+        },
+        "SWIRL":
+        {
+            "Recess Number": round(RN,2),
+            "Swirl angle (deg)":round(u.rad2deg(swirl_ang),1),
+
+            "Outer":{
+                "Geometric const": round(K_o,2)
+            },
+            "Inner":{
+                "Geometric const": round(K_i,2)
+            }
+        }
+}
+
+with open("swirl_dimensions.json", "w") as dimenout: 
+    json.dump(dimen, dimenout, indent=4)
+
+with open("swirl_performance.json", "w") as swirlout: 
+    json.dump(swirl, swirlout, indent=4)

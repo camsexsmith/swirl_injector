@@ -1,0 +1,14 @@
+{
+    "INNER": {
+        "Nozzle diameter (in)": 0.3,
+        "Port diameter (in)": 0.06,
+        "Port number": 6,
+        "Recess length (in)": 0.25,
+        "Wall thickness (in)": 0.08
+    },
+    "OUTER": {
+        "Nozzle diameter (in)": 0.6,
+        "Port diameter (in)": 0.09,
+        "Port number": 6
+    }
+}

@@ -1,0 +1,38 @@
+{
+    "PRESSURE": {
+        "Outer": {
+            "Inj Pressure (psi)": 652.5,
+            "Stiffness (%)": 30.49
+        },
+        "Inner": {
+            "Inj Pressure (psi)": 642.1,
+            "Stiffness (%)": 28.43
+        }
+    },
+    "FILL FRACTIONS": {
+        "Outer": {
+            "Fill Frac": 0.3
+        },
+        "Inner": {
+            "Fill Frac": 0.26
+        }
+    },
+    "FLOW RATES": {
+        "Outer": {
+            "Per swirl (kg/s)": 0.253
+        },
+        "Inner": {
+            "Per swirl (kg/s)": 0.278
+        }
+    },
+    "SWIRL": {
+        "Recess Number": 1.64,
+        "Swirl angle (deg)": 19.1,
+        "Outer": {
+            "Geometric const": 6.17
+        },
+        "Inner": {
+            "Geometric const": 3.47
+        }
+    }
+}
