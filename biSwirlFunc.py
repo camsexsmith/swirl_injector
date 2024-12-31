@@ -85,7 +85,8 @@ def biSwirl(mdot,MR,rho_ox,rho_f,Pc,centered,swirl_dir,R_i,R_o,r_i_h,r_o_h,r_i_n
 
     #Out
     #Recess Number (RN),swirl angle (swirlAng), P outer (Po), P inner (Pi), Vel axial (Uaxial), Vel Circum (VCircum),
-    #Cd inner (Cdi), Cd outer (Cdo), K inner (Ki), K outer (Ko), Collision dist (Lc)
+    #Cd inner (Cdi), Cd outer (Cdo), K inner (Ki), K outer (Ko), Collision dist (Lc), Fill frac inner exit (PhiNEi),
+    #Fill frac outer (PhiO)
     out_dict = {'RN':RN,
                 'swirlAng':theta_t,
                 'Po':P_o,
@@ -96,6 +97,8 @@ def biSwirl(mdot,MR,rho_ox,rho_f,Pc,centered,swirl_dir,R_i,R_o,r_i_h,r_o_h,r_i_n
                 'Cdo':Cd_o,
                 'Ki':K_i,
                 'Ko':K_o,
-                'Lc':Lc}
+                'Lc':Lc,
+                'PhiNEi':phi_i_ne,
+                'PhiO':phi_o_n}
     
     return out_dict
