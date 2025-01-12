@@ -1,5 +1,6 @@
 import math as m
-import swirlFunc as SF
+from functions import swirlFunc as SF
+from functions import cd_hot
 
 #inputs
 # mdot,MR, rhoOx, rhoF,ox/f centered,swirl dir, R_i, R_o, rh_i, rh_o, rnw_i, rnw_o, w_thck, n_i, n_o, L recess, Pc
@@ -15,7 +16,6 @@ def biSwirl(mdot,MR,rho_ox,rho_f,Pc,centered,swirl_dir,R_i,R_o,r_i_h,r_o_h,r_i_n
     #Dictates whether co-swirler (same direction) or counter-swirler (opposite direction)
     # Outer is held constant positive, inner can change direction
     # 1 = co-swirl and -1 = counter swirler
-    swirl_dir = -1
 
     if centered == 1:
         mdot_i = mdot_ox
@@ -81,20 +81,33 @@ def biSwirl(mdot,MR,rho_ox,rho_f,Pc,centered,swirl_dir,R_i,R_o,r_i_h,r_o_h,r_i_n
     V_t_ma_one = V_t_ma_on*r_t_ma_on/r_t_ma_one
 
     #Combined spray angle [deg]
-    theta_t = m.degrees(m.atan2(V_t_ma_one,U_t_one))
+    theta_t = m.atan2(V_t_ma_one,U_t_one)*180/m.pi
+
+    print(V_t_ma_one)
+    print(U_t_one)
+    #Cd correction for hot fire (iffy on accuracy)
+    Cd_o_h, Cd_i_h = cd_hot.cd_factor(Cd_o,Cd_i,RN)
+
+    #Pressure drops with corrected Cd
+    P_o_h = Pc + (1/(2*rho_o))*(mdot_o/(Cd_o_h*A_o_n))**2
+    P_i_h = Pc + (1/(2*rho_i))*(mdot_i/(Cd_i_h*A_i_n))**2
 
     #Out
-    #Recess Number (RN),swirl angle (swirlAng), P outer (Po), P inner (Pi), Vel axial (Uaxial), Vel Circum (VCircum),
-    #Cd inner (Cdi), Cd outer (Cdo), K inner (Ki), K outer (Ko), Collision dist (Lc), Fill frac inner exit (PhiNEi),
+    #Recess Number (RN),swirl angle (swirlAng), P outer (Po), P inner (Pi), P outer hot (Po_h), P inner hot (Pi_h), Vel axial (Uaxial), Vel Circum (VCircum),
+    #Cd inner (Cdi), Cd outer (Cdo), Cd inner hot (Cdi_h), Cd outer hot (Cdo_h), K inner (Ki), K outer (Ko), Collision dist (Lc), Fill frac inner exit (PhiNEi),
     #Fill frac outer (PhiO)
     out_dict = {'RN':RN,
                 'swirlAng':theta_t,
                 'Po':P_o,
                 'Pi':P_i,
+                'Po_h':P_o_h,
+                'Pi_h':P_i_h,
                 'Uaxial':U_t_one,
                 'Vcircum':V_t_ma_one,
                 'Cdi':Cd_i,
                 'Cdo':Cd_o,
+                'Cdi_h':Cd_i_h,
+                'Cdo_h':Cd_o_h,
                 'Ki':K_i,
                 'Ko':K_o,
                 'Lc':Lc,

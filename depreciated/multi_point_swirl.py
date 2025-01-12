@@ -1,4 +1,4 @@
-import biSwirlFunc as bSF
+import functions.biSwirlFunc as bSF
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import cm

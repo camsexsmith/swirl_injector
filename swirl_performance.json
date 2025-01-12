@@ -1,8 +1,8 @@
 {
     "PRESSURE": {
         "Outer": {
-            "Inj Pressure (psi)": 652.5,
-            "Stiffness (%)": 30.49
+            "Inj Pressure (psi)": 607.6,
+            "Stiffness (%)": 21.51
         },
         "Inner": {
             "Inj Pressure (psi)": 642.1,
@@ -11,7 +11,7 @@
     },
     "FILL FRACTIONS": {
         "Outer": {
-            "Fill Frac": 0.3
+            "Fill Frac": 0.33
         },
         "Inner": {
             "Fill Frac": 0.26
@@ -27,9 +27,9 @@
     },
     "SWIRL": {
         "Recess Number": 1.64,
-        "Swirl angle (deg)": 19.1,
+        "Swirl angle (deg)": 1248.4,
         "Outer": {
-            "Geometric const": 6.17
+            "Geometric const": 5.0
         },
         "Inner": {
             "Geometric const": 3.47

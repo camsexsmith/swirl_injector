@@ -1,5 +1,5 @@
 import math as m
-import swirlFunc as SF
+import functions.swirlFunc as SF
 
 #Total mass flow rate through swirl [kg/s]
 mdot = 0.22

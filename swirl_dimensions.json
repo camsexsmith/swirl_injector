@@ -8,7 +8,7 @@
     },
     "OUTER": {
         "Nozzle diameter (in)": 0.6,
-        "Port diameter (in)": 0.09,
+        "Port diameter (in)": 0.1,
         "Port number": 6
     }
 }
