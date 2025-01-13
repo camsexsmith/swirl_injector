@@ -5,17 +5,15 @@ from functions import cd_hot
 #inputs
 # mdot,MR, rhoOx, rhoF,ox/f centered,swirl dir, R_i, R_o, rh_i, rh_o, rnw_i, rnw_o, w_thck, n_i, n_o, L recess, Pc
 
-def biSwirl(mdot,MR,rho_ox,rho_f,Pc,centered,swirl_dir,R_i,R_o,r_i_h,r_o_h,r_i_nw,r_o_nw,n_i,n_o,w_th,Lr):
-
-    #Mass flow rate of oxidizer [kg/s]
-    mdot_ox = mdot*MR/(MR+1)
-
-    #Mass flow rate of fuel [kg/s]
-    mdot_f = mdot/(MR+1)
+def biSwirl(mdot_ox,mdot_f,rho_ox,rho_f,Pc,centered,swirl_dir,R_i,R_o,r_i_h,r_o_h,r_i_nw,r_o_nw,n_i,n_o,w_th,Lr):
 
     #Dictates whether co-swirler (same direction) or counter-swirler (opposite direction)
     # Outer is held constant positive, inner can change direction
     # 1 = co-swirl and -1 = counter swirler
+
+    #Centered dictates which swirler is the oxidizer element
+    #1 = Oxidizer centered
+    #0 = Fuel centered
 
     if centered == 1:
         mdot_i = mdot_ox
