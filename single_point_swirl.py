@@ -57,7 +57,7 @@ r_i_nw = u.in2m(0.150)
 R_o = u.in2m(0.300)-u.in2m(0.050)
 
 #Outer inlet hole radius [m]
-r_o_h = u.in2m(0.05)
+r_o_h = u.in2m(0.045)
 
 #Outer nozzle wall radius [m]
 r_o_nw = u.in2m(0.300)
@@ -160,12 +160,16 @@ dimen = {"INNER":{"Nozzle diameter (in)": u.m2in(r_i_nw*2),
 swirl = {"PRESSURE":
          {
         "Outer":{
-            "Inj Pressure (psi)": round(u.pa2psi(out["Po"]),1),
-            "Stiffness (%)": round(stiff_o,2)
+            "Inj Pressure cold (psi)": round(u.pa2psi(out["Po"]),1),
+            "Stiffness cold (%)": round(stiff_o,2),
+            "Injector Pressure hot (psi)": round(u.pa2psi(out["Po_h"]),1),
+            "Stiffness hot (%)": round(stiff_o_h,2)
             },
         "Inner":{
-            "Inj Pressure (psi)": round(u.pa2psi(out["Pi"]),1),
-            "Stiffness (%)": round(stiff_i,2)}
+            "Inj Pressure cold (psi)": round(u.pa2psi(out["Pi"]),1),
+            "Stiffness cold (%)": round(stiff_i,2),
+            "Injector Pressure hot (psi)": round(u.pa2psi(out["Pi_h"]),1),
+            "Stiffness hot (%)": round(stiff_i_h,2)}
         },
         "FILL FRACTIONS":
         {
