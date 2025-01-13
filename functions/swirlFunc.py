@@ -1,11 +1,14 @@
 import math as m
 
 def swirl(R,rh,rnw,rho,mdot,n,An,prnt:bool=True):
+    '''
+    Calculates a single swirl element
+    '''
 
     K = rnw*R/(n*rh**2)     #Geometric constant
 
-    phi_n = 0.01  #Initial filling coefficient guess
-    err = 1     #Initializing error variable
+    phi_n = 0.8 #Initial filling coefficient guess
+    err = 1       #Initializing error variable
 
     #Loop using Newtons Method for finding filling coefficient
     while err > 1e-6:
