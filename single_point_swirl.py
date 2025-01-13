@@ -95,8 +95,6 @@ dP_i_h = out["Pi_h"] - Pc
 d_film_c = film.film_size(mdot_fuel_film,num_film,cd_film,rhoF,dP_o)
 d_film_h = film.film_size(mdot_fuel_film,num_film,cd_film,rhoF,dP_o_h)
 
-print(u.m2in(d_film_c))
-print(u.m2in(d_film_h))
 
 RN = out["RN"]
 swirl_ang = out["swirlAng"]
@@ -123,15 +121,15 @@ else:
     print(f"Possible: gas core {round(u.m2in(r_o_gc),3)} inner {round(u.m2in(r_i_tot),3)}")
 print('-----------------------------')
 print('Pressures (Cold Flow)')
-print(f'Outer: {round(u.pa2psi(out["Po"]),1)} psi \ Stiffness {round(stiff_o,2)}')
-print(f'Inner: {round(u.pa2psi(out["Pi"]),1)} psi \ Stiffness {round(stiff_i,2)}')
+print(f'Outer: {round(u.pa2psi(out["Po"]),1)} psi \\ Stiffness {round(stiff_o,2)}')
+print(f'Inner: {round(u.pa2psi(out["Pi"]),1)} psi \\ Stiffness {round(stiff_i,2)}')
 print('Pressures (Hot Fire)')
-print(f'Outer: {round(u.pa2psi(out["Po_h"]),1)} psi \ Stiffness {round(stiff_o_h,2)}')
-print(f'Inner: {round(u.pa2psi(out["Pi_h"]),1)} psi \ Stiffness {round(stiff_i_h,2)}')
+print(f'Outer: {round(u.pa2psi(out["Po_h"]),1)} psi \\ Stiffness {round(stiff_o_h,2)}')
+print(f'Inner: {round(u.pa2psi(out["Pi_h"]),1)} psi \\ Stiffness {round(stiff_i_h,2)}')
 print('-----------------------------')
 print('Fill Fractions')
-print(f'Outer: {round(phi_o_n,2)} \ gas core radius {round(u.m2in(r_o_gc),3)} in')
-print(f'Inner: {round(phi_i_ne,2)} \ gas core radius {round(u.m2in(r_i_gc),3)} in')
+print(f'Outer: {round(phi_o_n,2)} \\ gas core radius {round(u.m2in(r_o_gc),3)} in')
+print(f'Inner: {round(phi_i_ne,2)} \\ gas core radius {round(u.m2in(r_i_gc),3)} in')
 print('-----------------------------')
 print('Swirls')
 print(f'RN: {round(RN,2)}')
@@ -154,8 +152,8 @@ dimen = {"INNER":{"Nozzle diameter (in)": u.m2in(r_i_nw*2),
          "OUTER":{"Nozzle diameter (in)":u.m2in(r_o_nw*2),
                   "Port diameter (in)": u.m2in(r_o_h*2),
                   "Port number": n_o},
-         "FILM": {"Film diameter cold (in)": u.m2in(d_film_c),
-                  "Film diameter hot (in)": u.m2in(d_film_h),
+         "FILM": {"Film diameter cold (in)": round(u.m2in(d_film_c),3),
+                  "Film diameter hot (in)": round(u.m2in(d_film_h),3),
                   "Film percent": percent_film,
                   "Film number": num_film}}
 

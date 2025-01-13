@@ -12,8 +12,8 @@
         "Port number": 6
     },
     "FILM": {
-        "Film diameter cold (in)": 0.03641661485581513,
-        "Film diameter hot (in)": 0.0331814151637287,
+        "Film diameter cold (in)": 0.036,
+        "Film diameter hot (in)": 0.033,
         "Film percent": 0.1,
         "Film number": 14
     }
