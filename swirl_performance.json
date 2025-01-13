@@ -1,8 +1,8 @@
 {
     "PRESSURE": {
         "Outer": {
-            "Inj Pressure (psi)": 607.6,
-            "Stiffness (%)": 21.51
+            "Inj Pressure (psi)": 587.1,
+            "Stiffness (%)": 17.43
         },
         "Inner": {
             "Inj Pressure (psi)": 642.1,
@@ -19,7 +19,7 @@
     },
     "FLOW RATES": {
         "Outer": {
-            "Per swirl (kg/s)": 0.253
+            "Per swirl (kg/s)": 0.228
         },
         "Inner": {
             "Per swirl (kg/s)": 0.278
@@ -27,7 +27,7 @@
     },
     "SWIRL": {
         "Recess Number": 1.64,
-        "Swirl angle (deg)": 1248.4,
+        "Swirl angle (deg)": 1214.8,
         "Outer": {
             "Geometric const": 5.0
         },

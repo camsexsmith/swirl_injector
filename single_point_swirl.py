@@ -18,9 +18,13 @@ centered = 1
 swirl_dir = 1     # 1 = co-swirl and -1 = counter swirler
 Pc = u.psi2pa(500)
 
+#Film cooling numbers
+num_film = 14
+cd_film = 0.7
+
 #Film cooling allocation. No extra fuel is considered. Solely tapped off from the main fuel source
 #100% is all fuel going to film, 0% is all fuel going to main engine
-percent_film = 0
+percent_film = 0.1
 
 #Calculates the film flow rate and main fuel flow rate for the engine
 mdot_fuel_film, mdot_fuel_main = film.distribute(mdot_tot,MR,percent_film)
@@ -36,7 +40,6 @@ mdot_fuel_main_PS = mdot_fuel_main/num_swirl
 
 #Total flow per swrirl
 mdot_PS = mdot_ox_main_PS+mdot_fuel_main_PS
-
 
 #Recess length [m]
 Lr = u.in2m(0.250)
@@ -88,6 +91,12 @@ dP_i = out["Pi"] - Pc
 
 dP_o_h = out["Po_h"] - Pc
 dP_i_h = out["Pi_h"] - Pc
+
+d_film_c = film.film_size(mdot_fuel_film,num_film,cd_film,rhoF,dP_o)
+d_film_h = film.film_size(mdot_fuel_film,num_film,cd_film,rhoF,dP_o_h)
+
+print(u.m2in(d_film_c))
+print(u.m2in(d_film_h))
 
 RN = out["RN"]
 swirl_ang = out["swirlAng"]
@@ -144,7 +153,11 @@ dimen = {"INNER":{"Nozzle diameter (in)": u.m2in(r_i_nw*2),
                   "Wall thickness (in)": u.m2in(w_th)},
          "OUTER":{"Nozzle diameter (in)":u.m2in(r_o_nw*2),
                   "Port diameter (in)": u.m2in(r_o_h*2),
-                  "Port number": n_o}}
+                  "Port number": n_o},
+         "FILM": {"Film diameter cold (in)": u.m2in(d_film_c),
+                  "Film diameter hot (in)": u.m2in(d_film_h),
+                  "Film percent": percent_film,
+                  "Film number": num_film}}
 
 swirl = {"PRESSURE":
          {

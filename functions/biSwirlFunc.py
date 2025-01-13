@@ -81,8 +81,6 @@ def biSwirl(mdot_ox,mdot_f,rho_ox,rho_f,Pc,centered,swirl_dir,R_i,R_o,r_i_h,r_o_
     #Combined spray angle [deg]
     theta_t = m.atan2(V_t_ma_one,U_t_one)*180/m.pi
 
-    print(V_t_ma_one)
-    print(U_t_one)
     #Cd correction for hot fire (iffy on accuracy)
     Cd_o_h, Cd_i_h = cd_hot.cd_factor(Cd_o,Cd_i,RN)
 

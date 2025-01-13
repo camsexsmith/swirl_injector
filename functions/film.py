@@ -14,6 +14,10 @@ def distribute(mdot_total,MR,percent_film):
     return mdot_film, mdot_fuel_main
 
 def film_size(mdot_film,num_film,cd_film,fuel_density,dP):
+    '''
+    Function takes the film flow rate, number of film holes, cd, density, and dP
+    and sizes the individual holes.
+    '''
     import math 
     
     a_film = mdot_film/(cd_film*(2*fuel_density*dP)**0.5)
