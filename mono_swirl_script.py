@@ -7,7 +7,7 @@ rh = u.in2m(0.060)
 rnw = u.in2m(0.20)
 R = u.in2m(0.20-0.060)
 
-mdot = 0.2
+mdot = 1
 rho = 1000
 
 n = 4

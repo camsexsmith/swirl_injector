@@ -10,13 +10,13 @@ import json
 
 #All values here are engine values - not swirler specific
 num_swirl = 8
-mdot_tot = 4.25
+mdot_tot = 3.45
 MR = 1.1
 rhoOx = 1100
 rhoF = 786
 centered = 1
 swirl_dir = 1     # 1 = co-swirl and -1 = counter swirler
-Pc = u.psi2pa(500)
+Pc = u.psi2pa(400)
 
 #Film cooling numbers
 num_film = 14
@@ -44,23 +44,23 @@ mdot_PS = mdot_ox_main_PS+mdot_fuel_main_PS
 #Recess length [m]
 Lr = u.in2m(0.250)
 
-#Distane from swirler center to inner inlet hole centerline [m]
-R_i = u.in2m(0.150)-u.in2m(0.025)
-
 #Inner inlet hole radius [m]
 r_i_h = u.in2m(0.03)
 
 #Inner nozzle wall radius [m]
 r_i_nw = u.in2m(0.150)
 
-#Distane from swirler center to outer inlet hole centerline [m]
-R_o = u.in2m(0.300)-u.in2m(0.050)
+#Distane from swirler center to inner inlet hole centerline [m]
+R_i = r_i_nw-r_i_h
 
 #Outer inlet hole radius [m]
 r_o_h = u.in2m(0.045)
 
 #Outer nozzle wall radius [m]
 r_o_nw = u.in2m(0.300)
+
+#Distane from swirler center to outer inlet hole centerline [m]
+R_o = r_o_nw-r_o_h
 
 #Wall thickness [m]
 w_th = u.in2m(0.080)
@@ -188,7 +188,7 @@ swirl = {"PRESSURE":
         "SWIRL":
         {
             "Recess Number": round(RN,2),
-            "Swirl angle (deg)":round(u.rad2deg(swirl_ang),1),
+            "Swirl angle (deg)":round(swirl_ang,1),
 
             "Outer":{
                 "Geometric const": round(K_o,2)
