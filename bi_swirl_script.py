@@ -10,13 +10,13 @@ import json
 
 #All values here are engine values - not swirler specific
 num_swirl = 8
-mdot_tot = 3.45
+mdot_tot = 4.25
 MR = 1.1
 rhoOx = 1100
 rhoF = 786
 centered = 1
 swirl_dir = 1     # 1 = co-swirl and -1 = counter swirler
-Pc = u.psi2pa(400)
+Pc = u.psi2pa(500)
 
 #Film cooling numbers
 num_film = 14

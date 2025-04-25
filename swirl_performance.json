@@ -1,16 +1,16 @@
 {
     "PRESSURE": {
         "Outer": {
-            "Inj Pressure cold (psi)": 483.4,
-            "Stiffness cold (%)": 20.86,
-            "Injector Pressure hot (psi)": 520.1,
-            "Stiffness hot (%)": 30.03
+            "Inj Pressure cold (psi)": 626.6,
+            "Stiffness cold (%)": 25.32,
+            "Injector Pressure hot (psi)": 682.3,
+            "Stiffness hot (%)": 36.46
         },
         "Inner": {
-            "Inj Pressure cold (psi)": 489.9,
-            "Stiffness cold (%)": 22.48,
-            "Injector Pressure hot (psi)": 496.5,
-            "Stiffness hot (%)": 24.13
+            "Inj Pressure cold (psi)": 636.5,
+            "Stiffness cold (%)": 27.29,
+            "Injector Pressure hot (psi)": 646.5,
+            "Stiffness hot (%)": 29.29
         }
     },
     "FILL FRACTIONS": {
@@ -23,10 +23,10 @@
     },
     "FLOW RATES": {
         "Outer": {
-            "Per swirl (kg/s)": 0.185
+            "Per swirl (kg/s)": 0.228
         },
         "Inner": {
-            "Per swirl (kg/s)": 0.226
+            "Per swirl (kg/s)": 0.278
         }
     },
     "SWIRL": {
